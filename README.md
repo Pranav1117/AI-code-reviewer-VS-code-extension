@@ -1,71 +1,39 @@
-# ai-code-reviewer README
+# 🔍 WEI Code Reviewer — VS Code Extension
 
-This is the README for your extension "ai-code-reviewer". After writing up a brief description, we recommend including the following sections.
-
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+**WEI Code Reviewer** is a powerful VS Code extension designed to help developers review code quickly and efficiently. Whether you're working solo or collaborating in a team, this tool speeds up your code review workflow with built-in insights and smart suggestions.
 
 ---
 
-## Following extension guidelines
+## ✨ Features
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+- 🧠 **AI-powered code feedback**  
+  Get intelligent suggestions, comments, and refactor tips on selected code.
 
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+- ⚡ **Inline annotations**  
+  Highlight issues and improvement areas directly in the editor.
 
-## Working with Markdown
+- 📋 **Customizable review templates**  
+  Standardize your review comments for consistency.
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+- 🔄 **Supports multiple languages**  
+  Works with JavaScript, TypeScript, Python, Java, and more.
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+---
 
-## For more information
+## 🛠️ Usage
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+1. **Select code** in your editor.
+2. Open the Command Palette (`Ctrl + Shift + P` or `Cmd + Shift + P` on Mac).
+3. Type and select `Code Reviewer: Review Selected Code`.
+4. Get instant feedback and suggestions in a side panel or inline.
 
-**Enjoy!**
+---
+
+## 📦 Installation
+
+Search for **Wei Code Reviewer** in the Extensions Marketplace and click **Install**.
+
+Or install via command line:
+
+```bash
+code --install-extension WeiDev.weicodereviewer

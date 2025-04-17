@@ -1,7 +1,8 @@
 {
-  "name": "ai-code-reviewer",
-  "displayName": "AI code reviewer",
+  "name": "wei-code-reviewer",
+  "displayName": "Wei AI code reviewer",
   "description": "Review your code with help of AI",
+  "publisher":"WeiDev",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.99.0"
