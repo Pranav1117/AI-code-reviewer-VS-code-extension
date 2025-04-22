@@ -33,7 +33,6 @@ export function activate(context: vscode.ExtensionContext) {
             const cleaned = data.replace(/^```json\s*/, "").replace(/```$/, "");
             const parsed = JSON.parse(cleaned);
             const issues = parsed["🐞 Issues & Bugs"];
-
             if (!issues || !Array.isArray(issues)) {
               vscode.window.showWarningMessage(
                 "No issues found in the critique."
@@ -53,7 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
               const linesToFind = buggyCode
                 .trim()
                 .split("\n")
-                .map((l) => l.trim());
+                .map((l: string) => l.trim());
 
               for (let i = 0; i < document.lineCount; i++) {
                 const lineText = document.lineAt(i).text.trim();
