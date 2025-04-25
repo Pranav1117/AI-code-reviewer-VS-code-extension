@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import * as dotenv from "dotenv";
-import { callLLMApi, makeReviewPrompt } from "./lib";
+import { aiCodeReview, finalPrompt } from "./lib";
 dotenv.config();
 
 export function activate(context: vscode.ExtensionContext) {
@@ -26,12 +26,13 @@ export function activate(context: vscode.ExtensionContext) {
         },
         async () => {
           try {
-            const prompt = makeReviewPrompt(code);
-            const critique = await callLLMApi(prompt);
+            const prompt = finalPrompt(code);
+            const critique = await aiCodeReview(prompt);
             // Strip Markdown code block and parse JSON
             const data = critique.candidates[0].content.parts[0].text;
             const cleaned = data.replace(/^```json\s*/, "").replace(/```$/, "");
             const parsed = JSON.parse(cleaned);
+            console.log("parsed", parsed);
             const issues = parsed["🐞 Issues & Bugs"];
             if (!issues || !Array.isArray(issues)) {
               vscode.window.showWarningMessage(
@@ -49,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
 
               if (!buggyCode) continue;
 
-              const linesToFind = buggyCode
+              const buggyLinesToFind = buggyCode
                 .trim()
                 .split("\n")
                 .map((l: string) => l.trim());
@@ -59,15 +60,15 @@ export function activate(context: vscode.ExtensionContext) {
 
                 // Single-line match
                 if (
-                  linesToFind.length === 1 &&
-                  lineText.includes(linesToFind[0])
+                  buggyLinesToFind.length === 1 &&
+                  lineText.includes(buggyLinesToFind[0])
                 ) {
-                  const start = document.lineAt(i).text.indexOf(linesToFind[0]);
+                  const start = document.lineAt(i).text.indexOf(buggyLinesToFind[0]);
                   const range = new vscode.Range(
                     i,
                     start,
                     i,
-                    start + linesToFind[0].length
+                    start + buggyLinesToFind[0].length
                   );
 
                   const diagnostic = new vscode.Diagnostic(
@@ -81,22 +82,22 @@ export function activate(context: vscode.ExtensionContext) {
 
                 // Multi-line match
                 if (
-                  linesToFind.length > 1 &&
-                  i + linesToFind.length <= document.lineCount
+                  buggyLinesToFind.length > 1 &&
+                  i + buggyLinesToFind.length <= document.lineCount
                 ) {
                   const multiLine = [];
-                  for (let j = 0; j < linesToFind.length; j++) {
+                  for (let j = 0; j < buggyLinesToFind.length; j++) {
                     multiLine.push(document.lineAt(i + j).text.trim());
                   }
 
                   if (
-                    JSON.stringify(multiLine) === JSON.stringify(linesToFind)
+                    JSON.stringify(multiLine) === JSON.stringify(buggyLinesToFind)
                   ) {
                     const range = new vscode.Range(
                       i,
                       0,
-                      i + linesToFind.length,
-                      document.lineAt(i + linesToFind.length - 1).text.length
+                      i + buggyLinesToFind.length,
+                      document.lineAt(i + buggyLinesToFind.length - 1).text.length
                     );
 
                     const diagnostic = new vscode.Diagnostic(

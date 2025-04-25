@@ -46,11 +46,11 @@ Please give specific examples and explanations. If there's nothing to improve, m
 
 Here is the code to review: `;
 
-export const makeReviewPrompt = (code: string) => {
+export const finalPrompt = (code: string) => {
   return `${basePrompt} ${code}`;
 };
 
-export const callLLMApi = async (prompt: string) => {
+export const aiCodeReview = async (prompt: string) => {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${geminiApiKey}`;
   // const url = `http://localhost:3001/dummyres/`;
   const payload = {
